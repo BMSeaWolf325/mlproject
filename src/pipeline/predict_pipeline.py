@@ -1,5 +1,8 @@
+import os
 import sys
+
 import pandas as pd
+
 from src.exception import CustomException
 from src.utils import load_object
 
@@ -8,32 +11,33 @@ class PredictPipeline:
     def __init__(self):
         pass
 
-    def predict(self,features):
+    def predict(self, features):
         try:
-            model_path=os.path.join("artifacts","model.pkl")
-            preprocessor_path=os.path.join('artifacts','preprocessor.pkl')
+            model_path = os.path.join("artifacts", "model.pkl")
+            preprocessor_path = os.path.join("artifacts", "preprocessor.pkl")
             print("Before Loading")
-            model=load_object(file_path=model_path)
-            preprocessor=load_object(file_path=preprocessor_path)
+            model = load_object(file_path=model_path)
+            preprocessor = load_object(file_path=preprocessor_path)
             print("After Loading")
-            data_scaled=preprocessor.transform(features)
-            preds=model.predict(data_scaled)
+            data_scaled = preprocessor.transform(features)
+            preds = model.predict(data_scaled)
             return preds
-        
-        except Exception as e:
-            raise CustomException(e,sys)
 
+        except Exception as e:
+            raise CustomException(e, sys)
 
 
 class CustomData:
-    def __init__(  self,
+    def __init__(
+        self,
         gender: str,
         race_ethnicity: str,
         parental_level_of_education,
         lunch: str,
         test_preparation_course: str,
         reading_score: int,
-        writing_score: int):
+        writing_score: int,
+    ):
 
         self.gender = gender
 
@@ -65,4 +69,3 @@ class CustomData:
 
         except Exception as e:
             raise CustomException(e, sys)
-

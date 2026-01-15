@@ -44,7 +44,7 @@ class ModelTrainer:
                 "Linear Regression": LinearRegression(),
                 "XGBRegressor": XGBRegressor(),
                 "CatBoosting Regressor": CatBoostRegressor(
-                    verbose=False, logging_level="Silent"
+                    verbose=False,
                 ),
                 "AdaBoost Regressor": AdaBoostRegressor(),
             }
